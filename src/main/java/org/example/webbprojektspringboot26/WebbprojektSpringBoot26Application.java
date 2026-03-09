@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WebbprojektSpringBoot26Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebbprojektSpringBoot26Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebbprojektSpringBoot26Application.class, args);
+    }
 
 }
