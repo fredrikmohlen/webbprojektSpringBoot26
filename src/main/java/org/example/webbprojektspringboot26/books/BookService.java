@@ -45,4 +45,9 @@ public class BookService {
         BookMapper.updateEntity(bookToUpdate, updateBookDTO);
         return BookMapper.toViewDTO(bookRepository.save(bookToUpdate));
     }
+
+    public void deleteBook(Long id) {
+        Book bookToDelete = bookRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        bookRepository.delete(bookToDelete);
+    }
 }
