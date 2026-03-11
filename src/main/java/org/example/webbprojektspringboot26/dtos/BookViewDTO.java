@@ -1,4 +1,4 @@
-package org.example.webbprojektspringboot26.books;
+package org.example.webbprojektspringboot26.dtos;
 
 import java.time.LocalDate;
 

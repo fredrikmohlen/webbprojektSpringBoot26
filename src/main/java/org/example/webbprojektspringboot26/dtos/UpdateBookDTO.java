@@ -1,4 +1,4 @@
-package org.example.webbprojektspringboot26.books;
+package org.example.webbprojektspringboot26.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;

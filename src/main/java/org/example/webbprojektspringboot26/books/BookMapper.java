@@ -1,9 +1,13 @@
 package org.example.webbprojektspringboot26.books;
 
+import org.example.webbprojektspringboot26.dtos.BookViewDTO;
+import org.example.webbprojektspringboot26.dtos.CreateBookDTO;
+import org.example.webbprojektspringboot26.dtos.UpdateBookDTO;
+
 public class BookMapper {
 
     private BookMapper() {}
-    
+
     public static Book toEntity(CreateBookDTO dto) {
         Book book = new Book();
         book.setTitle(dto.getTitle());
