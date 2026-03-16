@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class BookService {
-
+    //Todo: add @Transactional, where it is needed
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
@@ -34,7 +34,7 @@ public class BookService {
         List<Book> books = bookRepository.findAll();
         final List<BookViewDTO> bookViewDTOs = new ArrayList<>();
 
-        for (Book book :books) {
+        for (Book book : books) {
             bookViewDTOs.add(BookMapper.toViewDTO(book));
         }
         return bookViewDTOs;
