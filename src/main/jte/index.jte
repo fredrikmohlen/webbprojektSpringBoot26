@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="sv-SE">
 <head>
     <meta charset="utf-8">
     <title>Välkommen</title>

@@ -1,6 +1,7 @@
 package org.example.webbprojektspringboot26.dtos;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BookViewDTO {
 
@@ -16,6 +17,12 @@ public class BookViewDTO {
 
     public void setPublishDate(LocalDate publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public String getPublishDateFormatted() {
+        return publishDate != null
+                ? publishDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                : "";
     }
 
     public String getDescription() {
