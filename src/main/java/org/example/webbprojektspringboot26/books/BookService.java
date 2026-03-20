@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class BookService {
-    //Todo: add @Transactional, where it is needed
+
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {

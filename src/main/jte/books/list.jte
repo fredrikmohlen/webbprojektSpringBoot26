@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Boklista</title>
+    <link rel="stylesheet" href="css/theme.css">
     <style>
         table {
             width: 100%;
@@ -49,6 +50,10 @@
     @endfor
     </tbody>
 </table>
+<div class="button-container">
+    <a href="/books/create" class="button">Skapa en ny book</a>
+    <a href="/index" class="button">Startsida</a>
+</div>
 
 </body>
 </html>
