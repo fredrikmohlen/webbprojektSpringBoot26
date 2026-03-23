@@ -11,6 +11,9 @@ public class BookViewDTO {
     private String description;
     private LocalDate publishDate;
 
+
+    public BookViewDTO() {} // used for testing
+
     public LocalDate getPublishDate() {
         return publishDate;
     }

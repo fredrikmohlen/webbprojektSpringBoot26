@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class CreateBookDTO {
 
@@ -60,5 +61,16 @@ public class CreateBookDTO {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof CreateBookDTO that)) return false;
+        return Objects.equals(title, that.title) && Objects.equals(author, that.author) && Objects.equals(description, that.description) && Objects.equals(publishDate, that.publishDate) && Objects.equals(isbn, that.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, description, publishDate, isbn);
     }
 }
