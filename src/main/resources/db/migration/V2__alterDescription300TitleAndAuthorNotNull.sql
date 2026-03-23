@@ -1,0 +1,7 @@
+ALTER TABLE book
+    ALTER COLUMN description TYPE VARCHAR (300) USING (description :: VARCHAR (300));
+ALTER TABLE book
+    ALTER COLUMN title SET NOT NULL;
+
+ALTER TABLE book
+    ALTER COLUMN author SET NOT NULL;

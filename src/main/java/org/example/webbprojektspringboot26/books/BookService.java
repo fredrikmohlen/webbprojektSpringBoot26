@@ -1,4 +1,63 @@
 package org.example.webbprojektspringboot26.books;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.example.webbprojektspringboot26.dtos.BookViewDTO;
+import org.example.webbprojektspringboot26.dtos.CreateBookDTO;
+import org.example.webbprojektspringboot26.dtos.UpdateBookDTO;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
 public class BookService {
+
+    private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public BookViewDTO createBook(CreateBookDTO createBookDTO) {
+        Book book = BookMapper.toEntity(createBookDTO);
+        try {
+            Book savedBook = bookRepository.save(book);
+            return BookMapper.toViewDTO(savedBook);
+        } catch (DataIntegrityViolationException e) {
+            // Translate only ISBN collisions; preserve other integrity failures.
+            if (createBookDTO.getIsbn() != null && bookRepository.existsByIsbn(createBookDTO.getIsbn())) {
+                throw new DuplicateIsbnException("ISBN already exists: " + createBookDTO.getIsbn());
+            }
+            throw e;
+        }
+
+    }
+
+    public BookViewDTO getBookById(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return BookMapper.toViewDTO(book);
+    }
+
+    public List<BookViewDTO> getAllBooks() {
+
+        List<Book> books = bookRepository.findAll();
+        final List<BookViewDTO> bookViewDTOs = new ArrayList<>();
+
+        for (Book book : books) {
+            bookViewDTOs.add(BookMapper.toViewDTO(book));
+        }
+        return bookViewDTOs;
+    }
+
+    public BookViewDTO updateBook(Long id, UpdateBookDTO updateBookDTO) {
+        Book bookToUpdate = bookRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        BookMapper.updateEntity(bookToUpdate, updateBookDTO);
+        return BookMapper.toViewDTO(bookRepository.save(bookToUpdate));
+    }
+
+    public void deleteBook(Long id) {
+        Book bookToDelete = bookRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        bookRepository.delete(bookToDelete);
+    }
 }
