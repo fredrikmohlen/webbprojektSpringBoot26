@@ -25,7 +25,11 @@ public class BookService {
             Book savedBook = bookRepository.save(book);
             return BookMapper.toViewDTO(savedBook);
         } catch (DataIntegrityViolationException e) {
-            throw new DuplicateIsbnException("ISBN already exists: " + createBookDTO.getIsbn());
+            // Translate only ISBN collisions; preserve other integrity failures.
+            if (createBookDTO.getIsbn() != null && bookRepository.existsByIsbn(createBookDTO.getIsbn())) {
+                throw new DuplicateIsbnException("ISBN already exists: " + createBookDTO.getIsbn());
+            }
+            throw e;
         }
 
     }

@@ -48,6 +48,7 @@ public class BookController {
             bookService.createBook(book);
         } catch (DuplicateIsbnException e) {
             bindingResult.rejectValue("isbn", "duplicate", "ISBN finns redan");
+            model.addAttribute("today", LocalDate.now().minusDays(1).toString());
             model.addAttribute("errors", bindingResult);
             return "books/create";
         }

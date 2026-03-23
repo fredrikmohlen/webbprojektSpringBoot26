@@ -26,12 +26,12 @@ body::before {
     z-index: -1;
 }
 h1, h2 {
-    color: rgba(255, 255, 255, 0.95); /* ljus text mot mörk bakgrund */
-    text-align: center;               /* centrerar texten */
-    font-size: 3rem;                  /* storlek, justera efter behov */
-    margin: 40px 20px;                /* topp- och sidomarginal */
-    font-family: 'Arial', sans-serif; /* eller annan stilren font */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* lätt skugga för bättre kontrast */
+    color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    font-size: 3rem;
+    margin: 40px 20px;
+    font-family: Arial, sans-serif;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 
 }
 

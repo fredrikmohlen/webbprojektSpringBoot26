@@ -80,6 +80,7 @@ class BookControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(view().name("books/create"))
+                .andExpect(model().attributeExists("today"))
                 .andExpect(model().attributeExists("errors"))
                 .andExpect(model().attributeExists("book"));
 
@@ -99,13 +100,14 @@ class BookControllerTest {
                         .param("author", "Författare")
                         .param("description", "Beskrivning")
                         .param("publishDate", "2020-01-01")
-                        .param("isbn", "1234567890123") // dubblett
+                        .param("isbn", "1234567890123")
                 )
-                .andExpect(status().isOk())                         // stannar på formuläret
-                .andExpect(view().name("books/create"))             // samma view
-                .andExpect(model().attributeExists("errors"))       // BindingResult finns
-                .andExpect(model().attributeExists("book"))         // DTO finns kvar
-                .andExpect(model().attributeHasFieldErrors("book", "isbn")); // ISBN har fel
+                .andExpect(status().isOk())
+                .andExpect(view().name("books/create"))
+                .andExpect(model().attributeExists("today"))
+                .andExpect(model().attributeExists("errors"))
+                .andExpect(model().attributeExists("book"))
+                .andExpect(model().attributeHasFieldErrors("book", "isbn"));
 
         // Service ska ha anropats, men kastat exception
         verify(bookService).createBook(any(CreateBookDTO.class));
