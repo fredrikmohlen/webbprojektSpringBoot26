@@ -1,3 +1,6 @@
+@param String heroText
+@param String quoteText
+
 <!DOCTYPE html>
 <html lang="sv-SE">
 <head>
@@ -8,20 +11,20 @@
 <body>
 
     <div class="hero">
-        <h1>Välkommen till Bokprojektet</h1>
-        <p>Detta är en bokdatabas som grundar sig på en specifik karaktär, tanken var att det bara skulle gå att lägga till fler böcker skrivna om samma karaktär och av samma författare men nu är det tillåtet att lägga till lite vad som helst.
-        </p>
+        <h1>Välkommen till Bokdatabasen</h1>
+        <p>${heroText}</p>
     </div>
 
     <div class="quote-box">
-        "Karaktären är en muskulös man på 195cm och 110kg. Han är en före detta amerikansk militärpolis. Friheten att röra på sig är något som genomsyrar hans karaktär, han vandrar och liftar sig igenom USAs olika stater. Han står upp för dem svaga eller folk som råkat ut för orättvisa. Av många anses denna karaktär vara en riktig hjälte."
+        <h3>Karaktären från min favorit bokserie:</h3>
+        ${quoteText}
     </div>
 
 
 
     <div class="button-container">
         <a href="/books" class="big-button">Visa alla böcker</a>
-        <a href="/books/create" class="big-button">Skapa en ny bok</a>
+        <a href="/books/create" class="big-button">Lägg till ny bok</a>
     </div>
 
 </body>

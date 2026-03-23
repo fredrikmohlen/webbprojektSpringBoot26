@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
+
 @Controller
 public class BookController {
 
@@ -16,11 +18,6 @@ public class BookController {
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
-    }
-
-    @GetMapping("/index")
-    public String index(){
-        return "index";
     }
 
     @GetMapping("/books")
@@ -31,6 +28,8 @@ public class BookController {
 
     @GetMapping("/books/create")
     public String createBookForm(Model model){
+        String today = LocalDate.now().toString();
+        model.addAttribute("today", today);
         model.addAttribute("book", new CreateBookDTO());
         return "books/create";
     }

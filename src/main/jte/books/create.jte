@@ -1,16 +1,17 @@
 @param org.example.webbprojektspringboot26.dtos.CreateBookDTO book
 @param org.springframework.validation.BindingResult errors
+@param String today
 
 <!DOCTYPE html>
 <html lang="sv-SE">
 <head>
     <meta charset="UTF-8">
-    <title>Skapa ny bok</title>
+    <title>Lägg till ny bok</title>
     <link rel="stylesheet" href="/css/theme.css">
 </head>
 <body>
 
-<h1>Skapa en ny bok</h1>
+<h1>Lägg till en ny bok</h1>
 
 <div class="form-container">
     <form action="/books" method="post">
@@ -43,7 +44,7 @@
 
         <!-- Publiceringsdatum -->
         <label for="publishDate">Publiceringsdatum</label>
-        <input type="date" id="publishDate" name="publishDate"
+        <input type="date" id="publishDate" name="publishDate" max="${today}"
                class="${errors != null && errors.hasFieldErrors("publishDate") ? "input-error" : ""}"
                value="${book.getPublishDate() != null ? book.getPublishDate().toString() : ""}">
         @if(errors != null && errors.hasFieldErrors("publishDate"))
@@ -59,13 +60,13 @@
             <span class="field-error">${errors.getFieldError("isbn").getDefaultMessage()}</span>
         @endif
 
-        <button type="submit">Spara bok</button>
+        <button type="submit">Lägg till bok</button>
 
     </form>
 </div>
 
 <div class="button-container">
-    <a href="/index" class="button">Startsida</a>
+    <a href="/" class="button">Startsida</a>
 </div>
 
 </body>

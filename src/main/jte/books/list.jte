@@ -14,15 +14,15 @@
         }
         th, td {
             padding: 10px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #081a39;
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #081a39;
             font-weight: bold;
         }
         tr:hover {
-            background-color: #f9f9f9;
+            background-color: #3a4a85;
         }
     </style>
 </head>
@@ -52,7 +52,7 @@
 </table>
 <div class="button-container">
     <a href="/books/create" class="button">Skapa en ny book</a>
-    <a href="/index" class="button">Startsida</a>
+    <a href="/" class="button">Startsida</a>
 </div>
 
 </body>
