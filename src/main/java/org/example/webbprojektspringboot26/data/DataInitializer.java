@@ -2,6 +2,7 @@ package org.example.webbprojektspringboot26.data;
 
 import org.example.webbprojektspringboot26.books.Book;
 import org.example.webbprojektspringboot26.books.BookRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args)  {
 
         if (bookRepository.count() == 0) {
 
