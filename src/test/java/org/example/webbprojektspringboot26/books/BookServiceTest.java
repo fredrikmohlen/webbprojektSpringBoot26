@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -132,4 +133,19 @@ class BookServiceTest {
 
         verify(bookRepository).delete(book);
     }
+    @Test
+    void shouldThrowDuplicateIsbnExceptionWhenRepositoryThrowsConstraintError() {
+        // Arrange
+        when(bookRepository.save(any()))
+                .thenThrow(new DataIntegrityViolationException("duplicate"));
+
+        CreateBookDTO dto = new CreateBookDTO();
+        dto.setIsbn("1234567890123");
+
+        // Act + Assert
+        assertThrows(DuplicateIsbnException.class, () -> bookService.createBook(dto));
+
+        verify(bookRepository).save(any());
+    }
+
 }

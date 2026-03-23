@@ -20,6 +20,6 @@ class HomeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(model().attributeExists("heroText"))
-                .andExpect(model().attributeExists("quoteText"))        ;
+                .andExpect(model().attributeExists("quoteText"));
     }
 }

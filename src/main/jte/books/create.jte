@@ -59,6 +59,7 @@
         @if(errors != null && errors.hasFieldErrors("isbn"))
             <span class="field-error">${errors.getFieldError("isbn").getDefaultMessage()}</span>
         @endif
+        
 
         <button type="submit">Lägg till bok</button>
 

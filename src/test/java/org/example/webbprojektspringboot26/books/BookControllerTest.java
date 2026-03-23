@@ -86,6 +86,30 @@ class BookControllerTest {
         // Service ska INTE anropas
         verify(bookService, never()).createBook(any());
     }
+    @Test
+    void shouldReturnValidationErrorWhenIsbnIsDuplicate() throws Exception {
+
+        // Arrange: mocka så att servicen kastar dubblett-fel
+        doThrow(new DuplicateIsbnException("ISBN finns redan"))
+                .when(bookService).createBook(any(CreateBookDTO.class));
+
+        // Act + Assert
+        mockMvc.perform(post("/books")
+                        .param("title", "Testbok")
+                        .param("author", "Författare")
+                        .param("description", "Beskrivning")
+                        .param("publishDate", "2020-01-01")
+                        .param("isbn", "1234567890123") // dubblett
+                )
+                .andExpect(status().isOk())                         // stannar på formuläret
+                .andExpect(view().name("books/create"))             // samma view
+                .andExpect(model().attributeExists("errors"))       // BindingResult finns
+                .andExpect(model().attributeExists("book"))         // DTO finns kvar
+                .andExpect(model().attributeHasFieldErrors("book", "isbn")); // ISBN har fel
+
+        // Service ska ha anropats, men kastat exception
+        verify(bookService).createBook(any(CreateBookDTO.class));
+    }
 
 
 }

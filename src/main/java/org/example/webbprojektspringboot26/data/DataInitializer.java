@@ -4,11 +4,14 @@ import org.example.webbprojektspringboot26.books.Book;
 import org.example.webbprojektspringboot26.books.BookRepository;
 import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 @Component
+@Profile({"dev", "test"})
 public class DataInitializer implements CommandLineRunner {
 
     private final BookRepository bookRepository;
@@ -18,6 +21,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String @NonNull ... args)  {
 
         if (bookRepository.count() == 0) {

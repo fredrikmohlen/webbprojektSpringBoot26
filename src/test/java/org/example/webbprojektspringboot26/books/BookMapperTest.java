@@ -58,10 +58,12 @@ class BookMapperTest {
     void updateEntity_ShouldUpdateBookFields() {
         // Arrange
         Book book = new Book();
+        book.setId(1L);
         book.setTitle("Old Title");
         book.setAuthor("Old Author");
         book.setDescription("Old Desc");
         book.setPublishDate(LocalDate.of(1990, 1, 1));
+        book.setIsbn("1234567890123");
 
 
         UpdateBookDTO dto = new UpdateBookDTO();
@@ -79,6 +81,7 @@ class BookMapperTest {
         assertEquals("New Author", book.getAuthor());
         assertEquals("New Desc", book.getDescription());
         assertEquals(LocalDate.of(2020, 5, 20), book.getPublishDate());
-
+        assertEquals(1L, book.getId());
+        assertEquals("1234567890123", book.getIsbn());
     }
 }

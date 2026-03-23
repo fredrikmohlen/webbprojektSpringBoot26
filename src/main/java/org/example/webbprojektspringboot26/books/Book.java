@@ -22,7 +22,7 @@ public class Book {
     @NotBlank(message = "Author cannot be empty")
     private String author;
 
-    @Size(max = 500, message = "Description cannot exceed 500 characters")
+    @Size(max = 300, message = "Description cannot exceed 300 characters")
     private String description;
 
     @Past(message = "Publish date must be in the past")

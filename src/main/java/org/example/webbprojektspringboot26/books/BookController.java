@@ -28,7 +28,7 @@ public class BookController {
 
     @GetMapping("/books/create")
     public String createBookForm(Model model){
-        String today = LocalDate.now().toString();
+        String today = LocalDate.now().minusDays(1).toString();
         model.addAttribute("today", today);
         model.addAttribute("book", new CreateBookDTO());
         return "books/create";
@@ -40,10 +40,18 @@ public class BookController {
             BindingResult bindingResult, Model model
     ){
         if(bindingResult.hasErrors()){
+            model.addAttribute("today", LocalDate.now().minusDays(1).toString());
             model.addAttribute("errors", bindingResult);
             return "books/create";
         }
-        bookService.createBook(book);
+        try {
+            bookService.createBook(book);
+        } catch (DuplicateIsbnException e) {
+            bindingResult.rejectValue("isbn", "duplicate", "ISBN finns redan");
+            model.addAttribute("errors", bindingResult);
+            return "books/create";
+        }
+
         return "redirect:/books";
     }
 }

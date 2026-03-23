@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.example.webbprojektspringboot26.dtos.BookViewDTO;
 import org.example.webbprojektspringboot26.dtos.CreateBookDTO;
 import org.example.webbprojektspringboot26.dtos.UpdateBookDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,8 +21,13 @@ public class BookService {
 
     public BookViewDTO createBook(CreateBookDTO createBookDTO) {
         Book book = BookMapper.toEntity(createBookDTO);
-        Book savedBook = bookRepository.save(book);
-        return BookMapper.toViewDTO(savedBook);
+        try {
+            Book savedBook = bookRepository.save(book);
+            return BookMapper.toViewDTO(savedBook);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateIsbnException("ISBN already exists: " + createBookDTO.getIsbn());
+        }
+
     }
 
     public BookViewDTO getBookById(Long id) {
